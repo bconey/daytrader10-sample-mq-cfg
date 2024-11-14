@@ -82,7 +82,7 @@ app:
   # cloudwatch for metrics
 
   # version:
-  version: "fbfb4984-f6e1-4ac8-a20d-ebcbf18e5fa3"
+  version: ""
   # version: "7871cfbe-c7d3-4711-a91c-56812a670273"
 # probes
 # dynamic scaling
