@@ -96,7 +96,7 @@
 
     <jmsTopic id="TradeStreamerTopic" jndiName="jms/TradeStreamerTopic">
         <properties.wmqJms
-           baseQueueName="TradeStreamerTopic"
+           baseTopicName="TradeStreamerTopic"
            baseQueueManagerName="QM1"/>
     </jmsTopic>     
 
