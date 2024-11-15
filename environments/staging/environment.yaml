@@ -50,7 +50,9 @@ app:
   variables:
     - name: io_openliberty_sample_system_inMaintenance
       value: "false"
-
+  systemProperties:
+    - name: com.ibm.mq.cfg.SSL.outboundSNI
+      value: HOSTNAME
   # version:
   version: "a504e221-4041-4c0b-9733-17b0f4fc310e"
   endpoints: public
