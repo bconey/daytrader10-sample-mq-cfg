@@ -58,7 +58,7 @@
 
     <!-- <resourceAdapter id="mqJmsRa" location="/config/wmq.jakarta.jmsra.rar" /> -->
 
-    <include location="${shared.resource.dir}/ease/mq/javax-ra.xml"/>
+    <include location="${shared.resource.dir}/ease/mq/jakarta-ra.xml"/>
 
     <jmsConnectionFactory jndiName="jms/TradeBrokerQCF" connectionManagerRef="mqConnMgr">
         <properties.wmqJms
