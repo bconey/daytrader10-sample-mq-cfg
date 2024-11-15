@@ -67,7 +67,6 @@
            port="443"
            channel="CLOUD.APP.SVRCONN"
            queueManager="QM1"
-           sslCipherSuite="TLS_AES_128_GCM_SHA256"
            userName="app"
            password="${MQCredentials}"/>
     </jmsConnectionFactory>
@@ -87,7 +86,6 @@
            port="443"
            channel="CLOUD.APP.SVRCONN"
            queueManager="QM1"
-           sslCipherSuite="TLS_AES_128_GCM_SHA256"
            userName="app"
            password="${MQCredentials}"/>
     </jmsConnectionFactory>
