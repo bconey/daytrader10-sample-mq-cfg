@@ -68,6 +68,7 @@
            channel="CLOUD.APP.SVRCONN"
            queueManager="QM1"
            userName="app"
+           sslCipherSuite="TLS_AES_128_GCM_SHA256"
            password="${MQCredentials}"/>
     </jmsConnectionFactory>
 
@@ -87,6 +88,7 @@
            channel="CLOUD.APP.SVRCONN"
            queueManager="QM1"
            userName="app"
+           sslCipherSuite="TLS_AES_128_GCM_SHA256" 
            password="${MQCredentials}"/>
     </jmsConnectionFactory>
 
