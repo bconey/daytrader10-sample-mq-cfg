@@ -96,8 +96,7 @@
 
     <jmsTopic id="TradeStreamerTopic" jndiName="jms/TradeStreamerTopic">
         <properties.wmqJms
-           baseTopicName="TradeStreamerTopic"
-           baseQueueManagerName="QM1"/>
+           baseTopicName="TradeStreamerTopic"/>
     </jmsTopic>     
 
     <jmsActivationSpec id="io.openliberty.sample.daytrader10/DTBroker3MDB" authDataRef="TradeAdminAuthData">
