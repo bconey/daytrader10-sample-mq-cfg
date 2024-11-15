@@ -60,7 +60,7 @@
 
     <include location="${shared.resource.dir}/ease/mq/jakarta-ra.xml"/>
 
-    <jmsQueueConnectionFactory jndiName="jms/TradeBrokerQCF" connectionManagerRef="mqConnMgr">
+    <jmsConnectionFactory jndiName="jms/TradeBrokerQCF" connectionManagerRef="mqConnMgr">
         <properties.wmqJms
            transportType="CLIENT"
            hostName="qm1-7a97.qm33f4.private.us-east.mq2.appdomain.cloud"
@@ -70,7 +70,7 @@
            sslCipherSuite="TLS_AES_128_GCM_SHA256"
            userName="app"
            password="${MQCredentials}"/>
-    </jmsQueueConnectionFactory>
+    </jmsConnectionFactory>
 
     <connectionManager id="mqConnMgr" maxPoolSize="2"/>
 
@@ -80,7 +80,7 @@
            baseQueueManagerName="QM1"/>
     </jmsQueue>
     
-    <jmsTopicConnectionFactory jndiName="jms/TradeStreamerTCF" connectionManagerRef="mqConnMgr2">
+    <jmsConnectionFactory jndiName="jms/TradeStreamerTCF" connectionManagerRef="mqConnMgr2">
         <properties.wmqJms
            transportType="CLIENT"
            hostName="qm1-7a97.qm33f4.private.us-east.mq2.appdomain.cloud"
@@ -90,7 +90,7 @@
            sslCipherSuite="TLS_AES_128_GCM_SHA256"
            userName="app"
            password="${MQCredentials}"/>
-    </jmsTopicConnectionFactory>
+    </jmsConnectionFactory>
 
     <connectionManager id="mqConnMgr2" maxPoolSize="2"/>
 
