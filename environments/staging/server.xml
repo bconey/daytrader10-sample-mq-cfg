@@ -1,0 +1,125 @@
+<server>
+    <featureManager>
+        <feature>enterpriseBeans-4.0</feature>
+        <feature>servlet-6.0</feature>
+        <feature>faces-4.0</feature>
+        <feature>pages-3.1</feature>
+        <feature>persistence-3.1</feature>
+        <feature>mdb-4.0</feature>
+        <feature>messagingServer-3.0</feature>
+        <feature>messagingClient-3.0</feature>
+        <feature>cdi-4.0</feature>
+        <feature>websocket-2.1</feature>
+        <feature>concurrent-3.0</feature>
+        <feature>jsonp-2.1</feature>
+        <feature>jsonb-3.0</feature>
+        <feature>beanValidation-3.0</feature>
+        <feature>restfulWS-3.1</feature>
+        <feature>ssl-1.0</feature>
+        <feature>mpMetrics-5.1</feature>
+    </featureManager>
+
+    <!-- <keyStore id="defaultKeyStore" password="yourPassword" /> -->
+
+    <quickStartSecurity userName="admin" userPassword="admin" />
+    <mpMetrics authentication="false" />
+
+    <!-- adding in to see if it will fix DB2/MQ certificate issues in dev cluster -->
+    <ssl id="defaultSSLConfig" trustDefaultCerts="true" /> 
+    
+    <variable name="default.http.port" defaultValue="9080"/>
+    <variable name="default.https.port" defaultValue="9443"/>
+
+    <!--<logging traceSpecification="daytrader=fine"/>-->
+
+    <!-- allow reuse of 'busy' ports for fast server recycling on linux (where ports remain blocked for up to 2 mins after server stops) ${tradelite.http.port} set in bootstrap.properties -->
+    <httpEndpoint host="*" httpPort="${default.http.port}" httpsPort="${default.https.port}" id="defaultHttpEndpoint">
+        <tcpOptions soReuseAddr="true" />
+        <httpOptions maxKeepAliveRequests="-1" />
+    </httpEndpoint>
+
+    <application location="io.openliberty.sample.daytrader10.war" type="war" context-root="/daytrader" />
+
+    <connectionManager agedTimeout="-1" connectionTimeout="0" id="conMgr1" maxIdleTime="-1" maxPoolSize="100" minPoolSize="100" purgePolicy="FailingConnectionOnly" reapTime="-1"/> 
+
+    <jdbcDriver id="DB2JCC" libraryRef="DB2JCCLib"/>
+    <library id="DB2JCCLib" filesetRef="DB2JCCFileset"/>
+    <fileset id="DB2JCCFileset" dir="/config/db2jars" includes="db2jcc4.jar"/>
+
+    <authData id="TradeDataSourceAuthData" user="${env.dbUser}" password="${Db2Credentials}"/>
+
+    <dataSource jndiName="jdbc/TradeDataSource" jdbcDriverRef="DB2JCC" id="DefaultDataSource" connectionManagerRef="conMgr1" statementCacheSize="60" isolationLevel="TRANSACTION_READ_COMMITTED" type="javax.sql.XADataSource">
+        <properties serverName="${env.tradeDbHost}" portNumber="${env.tradeDbPort}" databaseName="${env.tradeDbName}" driverType="4" user="${env.dbUser}" password="${Db2Credentials}" sslConnection="${env.sslconn}"/>
+    </dataSource>
+
+
+    <!-- password specified when starting MQ docker container (e.g. MQ_APP_PASSWORD=passw0rd)-->
+    <authData id="TradeAdminAuthData" user="${env.mqUser}" password="${MQCredentials}" />
+
+    <!-- <resourceAdapter id="mqJmsRa" location="/config/wmq.jakarta.jmsra.rar" /> -->
+
+    <include location="${shared.resource.dir}/ease/mq/javax-ra.xml"/>
+
+    <jmsConnectionFactory jndiName="jms/TradeBrokerQCF" connectionManagerRef="mqConnMgr">
+        <properties.wmqJms
+           transportType="CLIENT"
+           hostName="qm1-7a97.qm33f4.private.us-east.mq2.appdomain.cloud"
+           port="443"
+           channel="CLOUD.APP.SVRCONN"
+           queueManager="QM1"
+           sslCipherSuite="TLS_AES_128_GCM_SHA256"
+           userName="app"
+           password="${MQCredentials}"/>
+    </jmsConnectionFactory>
+
+    <connectionManager id="mqConnMgr" maxPoolSize="2"/>
+
+    <jmsQueue id="TradeBrokerQueue" jndiName="jms/TradeBrokerQueue">
+        <properties.wmqJms
+           baseQueueName="TradeBrokerQueue"
+           baseQueueManagerName="QM1"/>
+    </jmsQueue>
+    
+    <jmsConnectionFactory jndiName="jms/TradeStreamerTCF" connectionManagerRef="mqConnMgr2">
+        <properties.wmqJms
+           transportType="CLIENT"
+           hostName="qm1-7a97.qm33f4.private.us-east.mq2.appdomain.cloud"
+           port="443"
+           channel="CLOUD.APP.SVRCONN"
+           queueManager="QM1"
+           sslCipherSuite="TLS_AES_128_GCM_SHA256"
+           userName="app"
+           password="${MQCredentials}"/>
+    </jmsConnectionFactory>
+
+    <connectionManager id="mqConnMgr2" maxPoolSize="2"/>
+
+    <jmsTopic id="TradeStreamerTopic" jndiName="jms/TradeStreamerTopic">
+        <properties.wmqJms
+           baseQueueName="TradeStreamerTopic"
+           baseQueueManagerName="QM1"/>
+    </jmsTopic>     
+
+    <jmsActivationSpec id="io.openliberty.sample.daytrader10/DTBroker3MDB" authDataRef="TradeAdminAuthData">
+        <properties.wmqJms 
+           transportType="CLIENT"
+           hostName="qm1-7a97.qm33f4.private.us-east.mq2.appdomain.cloud"
+           port="443"
+           channel="CLOUD.APP.SVRCONN"
+           queueManager="QM1"
+           destinationRef="TradeBrokerQueue"
+           destinationType="jakarta.jms.Queue"/>
+    </jmsActivationSpec>
+
+    <jmsActivationSpec id="io.openliberty.sample.daytrader10/DTStreamer3MDB" authDataRef="TradeAdminAuthData">
+        <properties.wmqJms 
+           transportType="CLIENT"
+           hostName="qm1-7a97.qm33f4.private.us-east.mq2.appdomain.cloud"
+           port="443"
+           channel="CLOUD.APP.SVRCONN"
+           queueManager="QM1"
+           destinationRef="TradeStreamerTopic"
+           destinationType="jakarta.jms.Topic"/>
+    </jmsActivationSpec>
+  
+</server>
