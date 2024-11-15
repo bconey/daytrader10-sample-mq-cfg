@@ -23,10 +23,6 @@ app:
   services:
     - crn: "crn:v1:bluemix:public:mqcloud:us-east:a/67165156f10340b4a16f9a90b4d63e27:33f489f6-eae9-4d9e-9a39-db942426e00d::"
   env:
-    - name: JVM_ARGS # q: make that as a top level 'jvmArguments' property?
-      value: "-DenvironmentType=stage"
-    - name: MY_ENV
-      value: "1"
     - name: tradeDbHost
       #value: "125f9f61-9715-46f9-9399-c8177b21803b.c1ogj3sd0tgtu0lqde00.databases.appdomain.cloud"
       value: "ec2-35-153-18-9.compute-1.amazonaws.com"
@@ -47,44 +43,14 @@ app:
     - name: sslconn
       #value: "true"
       value: "false"
-    - name: QueueManager
-      value: QM1
-    - name: sslciphersuite
-      value: "SSL_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
-      #value: 'TLS_AES_128_GCM_SHA256'
-    - name: mqHost
-      #value: 'qm1-7ede.qm.us-south.mq.appdomain.cloud' #hostname where MQ container is running
-      value: 'ec2-35-153-18-9.compute-1.amazonaws.com'
-    - name: mqPort
-      #value: "30973"
-      value: "1414"
-    - name: mqChannel
-      #value: "CLOUD.APP.SVRCONN"
-      value: "DEV.APP.SVRCONN"
     - name: mqUser
       value: "app"
-    # - name: mqPass
-      # value: "{xor}Mi4vPiwsKG8tOw=="
-      #value: "{aes}ACGv685f2PtN9s2NlsmLyRRJd8dxOSzyWXOl5JWJ/QjQDZ/GgZdyU3KrkHib+vx2QKoCPDHETwBcNs6c3W0UDiyuJiRk6ph/TwOCyxxFJYJm"
-      #value: "{xor}DAUyFjoRCSoxEisbGBoTEzBnBzw9azEmLDoAMxgcMRY5BS8GMygWaDwVMWs="
-      #value: "SZmIeNVunMtDGELLo8Xcb4nyse_lGCnIfZpYlwI7cJn4"
-      # value: "mqpassw0rd"
   # List of variables that can be referenced in server.xml
   # Liberty encrypted values are supported
   variables:
     - name: io_openliberty_sample_system_inMaintenance
       value: "false"
-    - name: discoveryEndpoint
-      value: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_eksr97OJU/.well-known/openid-configuration"
-    - name: clientId
-      value: 7rgjkvbjl487r2i1bvialvj2f4
-    - name: clientSecret
-      value: "{aes}AIUxkkmTE73hJrAj3oN5OMYQnC9j3NWNJNTXXAchJ97qyrr7MHYMmn1NEtxgHXFqmYp8VNEAYhB5hJS8voLsRYyfA/7GpDdznGs/DtYEqzlw"
-  # cloudwatch for metrics
 
   # version:
   version: "a504e221-4041-4c0b-9733-17b0f4fc310e"
   endpoints: public
-# probes
-# dynamic scaling
-# scaling to 0
