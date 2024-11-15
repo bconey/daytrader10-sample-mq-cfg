@@ -84,6 +84,7 @@ app:
 
   # version:
   version: "a504e221-4041-4c0b-9733-17b0f4fc310e"
+  endpoints: public
 # probes
 # dynamic scaling
 # scaling to 0
