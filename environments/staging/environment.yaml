@@ -50,13 +50,13 @@ app:
   # List of variables that can be referenced in server.xml
   # Liberty encrypted values are supported
   variables:
-    - name: io_openliberty_sample_system_inMaintenance
-      value: "false"
+    - name: MQCredentials
+      value: "XhL9JqEIezCDQlIPpn_Hm8wjWo6tT5Y6OWoH6g06QtwV"
   systemProperties:
     - name: com.ibm.mq.cfg.SSL.outboundSNI
       value: HOSTNAME
-    - name: javax.net.debug
-      value: "ssl,handshake"
+    #- name: javax.net.debug
+    #  value: "ssl,handshake"
   # version:
   version: "a504e221-4041-4c0b-9733-17b0f4fc310e"
   endpoints: public
