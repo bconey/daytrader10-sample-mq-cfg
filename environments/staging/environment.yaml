@@ -26,7 +26,7 @@ app:
     - name: WLP_LOGGING_STACK_TRACE_SINGLE_ENTRY
       value: "true"
     - name: tradeDbHost
-      value: "9938aec0-8105-433e-8bf9-0fbb7e483086.c1ogj3sd0tgtu0lqde00.databases.appdomain.cloud"
+      value: "bad33e-8bf9-0fbb7e483086.c1ogj3sd0tgtu0lqde00.databases.appdomain.cloud"
       #value: "ec2-35-153-18-9.compute-1.amazonaws.com"
     - name: tradeDbName
       value: bludb
