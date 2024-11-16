@@ -106,6 +106,7 @@
            port="443"
            channel="CLOUD.APP.SVRCONN"
            queueManager="QM1"
+           sslCipherSuite="TLS_AES_128_GCM_SHA256"
            destinationRef="TradeBrokerQueue"
            destinationType="jakarta.jms.Queue"/>
     </jmsActivationSpec>
@@ -117,6 +118,7 @@
            port="443"
            channel="CLOUD.APP.SVRCONN"
            queueManager="QM1"
+           sslCipherSuite="TLS_AES_128_GCM_SHA256" 
            destinationRef="TradeStreamerTopic"
            destinationType="jakarta.jms.Topic"/>
     </jmsActivationSpec>
