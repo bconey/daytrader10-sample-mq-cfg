@@ -26,25 +26,25 @@ app:
     - name: WLP_LOGGING_STACK_TRACE_SINGLE_ENTRY
       value: "true"
     - name: tradeDbHost
-      #value: "125f9f61-9715-46f9-9399-c8177b21803b.c1ogj3sd0tgtu0lqde00.databases.appdomain.cloud"
-      value: "ec2-35-153-18-9.compute-1.amazonaws.com"
+      value: "9938aec0-8105-433e-8bf9-0fbb7e483086.c1ogj3sd0tgtu0lqde00.databases.appdomain.cloud"
+      #value: "ec2-35-153-18-9.compute-1.amazonaws.com"
     - name: tradeDbName
-      #value: bludb
-      value: TRADEDB
+      value: bludb
+      #value: TRADEDB
     - name: tradeDbPort
-      #value: "30426"
-      value: "60005"
+      value: "32459"
+      #value: "60005"
     - name: dbUser
-      #value: vbd91286
-      value: db2inst1
-    # - name: dbPass
-      # value: "{xor}Oz1tLz4sLChvLTs="
+      value: lnl43017
+      #value: db2inst1
+    - name: dbPass
+      value: "{xor}G2cNDxYYCCU9HDI0OggaJQ=="
       #value: "{xor}aBwcKx0lDjkGJThsbAYObA=="
       #value: "7CCtBzQfYzg33YQ3"
       # value: "db2passw0rd"
     - name: sslconn
-      #value: "true"
-      value: "false"
+      value: "true"
+      #value: "false"
     - name: mqUser
       value: "app"
   # List of variables that can be referenced in server.xml
